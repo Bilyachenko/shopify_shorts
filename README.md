@@ -2,29 +2,6 @@
 shopify shorts codes
 
 <h4>Create shopify section exemple:</h4>
-
-<div class="newvidesloder">
-	{% for block in section.blocks %}
-		<div class="videslide-item">
-			<div class="slideitem-video">
-				<video autoplay muted loop id="myVideo">
-				  <source src="{{ block.settings.videolink }}" type="video/mp4">
-				</video>
-			</div>
-			<div class="slidetextinner">
-				<div class="slideinnerfllex">
-					<div class="slidetitle">
-						{{ block.settings.slidename }}
-					</div>
-					<div class="slidebtn">
-						<a href="{{ block.settings.slidelink }}" class="btn btnwhite">Shop Now</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	{% endfor %}	
-</div>
-<hr>
 <pre>
   {% schema %}
     {
