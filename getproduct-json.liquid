@@ -1,0 +1,50 @@
+{% layout none %}
+
+<div id="app">
+
+	<template v-if="collection">
+		
+		<h1 v-html="collection.title"></h1>
+			
+		<div v-for="product in collection.products">
+		<a :href="product.link_product"><h2 v-html="product.title"></h2></a>
+         
+			<img :src="product.image" alt="">
+			<div v-for="variant in product.variants">
+				<button v-html="variant.title"></button>
+			</div>
+		
+		</div>
+
+	</template>
+
+</div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.2.30/vue.global.min.js"></script>
+
+    
+<script>
+	
+	const options = {
+		name: 'Collection App',
+		data(){
+			return {
+				collection: null
+			}
+		},
+		methods: {
+			grabCollection(){
+				fetch('https://yourdomainname/collections/{{collection.handle}}?view=demo-two')
+					.then(response => response.json())
+					.then(data => this.collection = data);
+			}
+		},
+		mounted(){
+			this.grabCollection();
+		}
+	}
+	const CollectionApp = Vue.createApp(options).mount('#app');
+
+</script>
+
+
