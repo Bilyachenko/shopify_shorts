@@ -1,0 +1,57 @@
+{% layout none %}
+//search custom page
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.2.30/vue.global.min.js"></script>
+
+
+<div id="search">
+  <input type="text" v-model="searchTerm" @change="search(searchTerm);">
+  
+  <div class="product-container" v-if="items.length > 0">
+    <div v-for="item in items" class="itemproduct">
+
+      <div v-html="item.price"></div>
+      <a :href="item.url" v-html="item.title"></a>
+
+
+    </div>
+  </div>
+  <div v-else>
+    <div v-if="loading">loading</div>
+    <div v-else="loading">no match</div>
+  </div>
+</div>
+  
+<script>
+  
+  const searchApp = {
+    name : "Search App",
+    data(){
+    	return{
+    		searchTerm: 'Shoes',
+            items: [],
+         	loading: true
+  		}
+  	},
+    created(){
+    	this.search(this.searchTerm);
+    },
+    methods:{
+      search(term){
+      	this.loading = true;
+        fetch(`/search/suggest.json?q=${term}&resources[type]=product&resources[options][unavailable_products]=last`)
+        .then((response) => response.json())
+        .then((suggestions) => {
+          const productSuggestions = suggestions.resources.results.products;
+          if (productSuggestions.length > 0) {
+			this.items = productSuggestions;
+          }
+          this.loading = false;
+  		});
+          
+      }
+    }
+  }
+  
+  const vueSearchapp = Vue.createApp(searchApp).mount('#search');
+  
+  </script>
