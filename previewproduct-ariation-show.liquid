@@ -1,0 +1,15 @@
+	//how show in product preview variation options in shopify 2.0
+  <div class="productpricecolor">
+    {% render 'price', product: card_product, price_class: '' %}
+    <div class="optionliscolor">
+      {%- for option in card_product.options_with_values -%}
+
+        {%- for value in option.values -%}
+
+        <div class="coloritem" data-image="{{card_product.variants[forloop.index0].featured_media | image_url}}" style="background-color:{{ card_product.variants[forloop.index0].metafields.my_fields.color }};">
+          <a href="{{card_product.variants[forloop.index0].url}}">&nbsp;</a>
+        </div>
+        {%- endfor -%}
+      {%- endfor -%}
+    </div>
+  </div>
