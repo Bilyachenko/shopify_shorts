@@ -1,4 +1,5 @@
 # shopify_shorts
+https://shopify.dev/themes/architecture/templates/json-templates
 shopify shorts codes
 
 <h4>Create shopify section exemple:</h4>
